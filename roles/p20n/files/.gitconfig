@@ -1,0 +1,12 @@
+[core]
+	editor = vim
+[user]
+	name = Jani Hur
+	email = webmaster@metsankulma.net
+[alias]
+	br = branch
+	co = checkout
+	graph = !git fetch origin && git log --graph --all --name-status
+	st = status
+[safe]
+    directory = *

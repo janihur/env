@@ -1,0 +1,33 @@
+---
+- name: $HOME/bin
+  file:
+    state: directory
+    path: $HOME/bin
+
+- name: bash configuration
+  copy:
+    src: files/{{ item }}
+    dest: $HOME/{{ item }}
+  with_items:
+  - .bash_aliases
+  - .bash_user
+
+- name: emacs configuration
+  git:
+    repo: git@bitbucket.org:janihur/emacs-d.git
+    dest: $HOME/.emacs.d
+
+- name: git configuration
+  copy:
+    src: files/.gitconfig
+    dest: $HOME/.gitconfig
+
+- name: ssh configuration
+  copy:
+    src: files/ssh-config
+    dest: $HOME/.ssh/config
+
+- name: vi configuration
+  copy:
+    src: files/.vimrc
+    dest: $HOME/.vimrc

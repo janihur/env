@@ -1,0 +1,4 @@
+# -*- mode: sh -*-
+bind 'set bell-style visible'
+
+export EDITOR=vi

@@ -1,0 +1,24 @@
+---
+- name: common tooling
+  become: yes
+  apt:
+    name:
+    - ack-grep
+    - bat
+    - curl
+    - emacs
+    - ffmpeg
+    - pass
+    - tig
+    - tree
+    state: present
+
+- name: remove useless packages (apt) from the cache
+  become: yes
+  apt:
+    autoclean: yes
+
+- name: remove dependencies (apt) that are no longer required
+  become: yes
+  apt:
+    autoremove: yes

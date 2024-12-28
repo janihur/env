@@ -1,0 +1,8 @@
+# private cloud hosts ----------------------------------------------------------
+Host mini-1.private.cloud
+     Hostname 10.10.20.3
+     User root
+
+Host owncloud.private.cloud
+     Hostname 10.10.20.4
+     User root
