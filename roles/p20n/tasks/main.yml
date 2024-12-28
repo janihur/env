@@ -14,7 +14,7 @@
 
 - name: emacs configuration
   git:
-    repo: git@bitbucket.org:janihur/emacs-d.git
+    repo: git@github.com:janihur/emacs-d.git
     dest: $HOME/.emacs.d
 
 - name: git configuration
