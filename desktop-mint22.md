@@ -33,4 +33,18 @@ Enable Firefox account sync. For other settings see [firefox](http://devoops.met
 
 ## Thunderbird Setup
 
-TODO
+See [Email client configuration overview](https://help.dreamhost.com/hc/en-us/articles/214918038-Email-client-configuration-overview).
+
+```
+Menu
+ > View
+  > Layout
+   > Select: Classic View
+```
+
+```
+Settings
+ > Composition
+  > Spelling
+   > Uncheck: Enable spellcheck as you type
+```

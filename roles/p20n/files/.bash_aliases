@@ -5,6 +5,7 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 alias c=batcat
 alias e='emacsclient -t'
 alias g=git
+alias gl='git log -3 --name-status'
 alias s=less
 alias t='tig status'
 
