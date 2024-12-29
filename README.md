@@ -22,6 +22,11 @@ ssh -T git@github.com
 ssh -T git@bitbucket.org
 ```
 
+Add the key to all `private.cloud` and website hosts:
+```
+ssh-copy-id -f -i PUBLIC_KEY USER@HOST
+```
+
 ## Essential Linux Tooling
 
 ```
