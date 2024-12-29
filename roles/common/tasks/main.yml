@@ -14,6 +14,13 @@
     - tree
     state: present
 
+- name: vim is a synonym for vi
+  become: yes
+  file:
+    state: link
+    src: /usr/bin/vi
+    dest: /usr/local/bin/vim
+
 - name: remove useless packages (apt) from the cache
   become: yes
   apt:
