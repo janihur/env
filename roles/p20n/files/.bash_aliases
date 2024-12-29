@@ -6,6 +6,7 @@ alias c=batcat
 alias e='emacsclient -t'
 alias g=git
 alias gl='git log -3 --name-status'
+alias l='eza --all --all --classify --group --group-directories-first --long --time-style=long-iso'
 alias s=less
 alias t='tig status'
 
