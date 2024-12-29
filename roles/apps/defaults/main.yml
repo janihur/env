@@ -1,0 +1,5 @@
+---
+telegram_desktop_version: 5.9.0
+telegram_desktop_package: tsetup.{{ telegram_desktop_version }}.tar.xz
+telegram_desktop_download_url: https://github.com/telegramdesktop/tdesktop/releases/download/v{{ telegram_desktop_version }}/{{ telegram_desktop_package }}
+telegram_desktop_home: /opt/telegram-desktop-{{ telegram_desktop_version }}

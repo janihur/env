@@ -1,0 +1,3 @@
+---
+- name: include telegram desktop
+  include_tasks: telegram-desktop.yml

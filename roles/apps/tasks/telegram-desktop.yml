@@ -1,0 +1,36 @@
+---
+# https://desktop.telegram.org/
+# https://github.com/telegramdesktop/tdesktop/releases/
+
+- name: "telegram desktop {{ telegram_desktop_version }} : to be or not to be"
+  stat:
+    path: "{{ telegram_desktop_home }}"
+  register: telegram_desktop
+
+- name: "telegram desktop {{ telegram_desktop_version }} : home directory"
+  become: yes
+  file:
+    path: "{{ telegram_desktop_home }}"
+    state: directory
+
+- name: "telegram desktop {{ telegram_desktop_version }} : download installation package"
+  become: yes
+  when: telegram_desktop.stat.exists == False
+  get_url:
+    url: "{{ telegram_desktop_download_url }}"
+    dest: /tmp/{{ telegram_desktop_package }}
+
+- name: "telegram desktop {{ telegram_desktop_version }} : unarchive"
+  become: yes
+  when: telegram_desktop.stat.exists == False
+  unarchive:
+    remote_src: yes
+    src: /tmp/{{ telegram_desktop_package }}
+    dest: "{{ telegram_desktop_home }}"
+
+- name: "telegram desktop {{ telegram_desktop_version }} : convenient start command"
+  become: yes
+  file:
+    state: link
+    src: "{{ telegram_desktop_home }}/Telegram/Telegram"
+    dest: /usr/local/bin/telegram-desktop

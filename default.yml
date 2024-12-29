@@ -5,4 +5,5 @@
 
   roles:
     - { role: common, tags: ["always"] }
+    - { role: apps,   tags: ["always"] }
     - { role: p20n,   tags: ["always"] }
