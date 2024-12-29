@@ -22,6 +22,16 @@
     src: files/.gitconfig
     dest: $HOME/.gitconfig
 
+- name: gpg configuration directory
+  file:
+    state: directory
+    path: $HOME/.gnupg
+    
+- name: gpg configuration
+  copy:
+    src: files/gpg-agent.conf
+    dest: $HOME/.gnupg/gpg-agent.conf
+
 - name: ssh configuration
   copy:
     src: files/ssh-config
