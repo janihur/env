@@ -9,6 +9,7 @@
     - emacs
     - eza
     - ffmpeg
+    - openjdk-21-jre-headless
     - pass
     - tig
     - tree
