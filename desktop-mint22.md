@@ -48,3 +48,9 @@ Settings
   > Spelling
    > Uncheck: Enable spellcheck as you type
 ```
+
+```
+Menu
+ > Tools
+  > Message Filters
+```
