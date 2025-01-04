@@ -17,6 +17,16 @@
     repo: git@github.com:janihur/emacs-d.git
     dest: $HOME/.emacs.d
 
+- name: /etc/hosts configuration
+  become: yes
+  ansible.builtin.blockinfile:
+    path: /etc/hosts
+    block: |
+      {{ item.ip }} {{ item.name }}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
+  loop:
+    - { name: filevault.home, ip: 172.10.0.12 }
+
 - name: git configuration
   copy:
     src: files/.gitconfig
@@ -31,6 +41,30 @@
   copy:
     src: files/gpg-agent.conf
     dest: $HOME/.gnupg/gpg-agent.conf
+
+- name: blackarmor nas mount points
+  become: yes
+  file:
+    state: directory
+    path: "{{ item }}"
+  loop:
+    - /mnt/filevault/arkisto
+    - /mnt/filevault/backup
+    - /mnt/filevault/kotivideot
+    - /mnt/filevault/music
+    - /mnt/filevault/sw
+    - /mnt/filevault/valokuvat
+    - /mnt/filevault/xxx
+
+- name: blackarmor nas mount scripts
+  become: yes
+  copy:
+    src: files/{{ item }}
+    dest: /usr/local/bin/{{ item }}
+    mode: a=rx
+  loop:
+    - filevault-mount.sh
+    - filevault-umount.sh
 
 - name: ssh configuration
   copy:

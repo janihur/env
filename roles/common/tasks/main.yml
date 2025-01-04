@@ -9,6 +9,7 @@
     - emacs
     - eza
     - ffmpeg
+    - nfs-client
     - openjdk-21-jre-headless
     - pass
     - tig
