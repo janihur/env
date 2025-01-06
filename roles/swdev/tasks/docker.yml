@@ -1,0 +1,49 @@
+---
+# docker engine
+
+# https://docs.docker.com/engine/install/ubuntu/
+- name: "docker : uninstall possible old versions"
+  become: yes
+  apt:
+    name:
+      - docker.io
+      - docker-doc
+      - docker-compose
+      - docker-compose-v2
+      - podman-docker
+      - containerd
+      - runc
+    state: absent
+
+- name: "docker : apt repository settings"
+  become: yes
+  copy:
+    src: files/{{ item.file }}
+    dest: "{{ item.dest }}/{{ item.file }}"
+    owner: root
+    group: root
+    mode: a=r
+  with_items:
+    - { file: docker.gpg,  dest: /etc/apt/keyrings }
+    - { file: docker.list, dest: /etc/apt/sources.list.d }
+
+- name: "docker : install"
+  become: yes
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+    update_cache: yes
+
+# manage docker as a non-root user
+# https://docs.docker.com/engine/install/linux-postinstall/
+- name: add the user to docker group
+  become: yes
+  ansible.builtin.user:
+    name: "{{ lookup('env', 'USER') }}"
+    groups: docker
+    append: yes
