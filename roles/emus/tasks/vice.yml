@@ -1,0 +1,49 @@
+---
+# versatile commodore emulator
+# https://en.wikipedia.org/wiki/VICE
+
+# version 3.7.1
+- name: "vice : install"
+  become: yes
+  apt:
+    name:
+    - vice
+    state: present
+
+# roms
+# the roms (*.bin files) can be found from the source code repository:
+# https://sourceforge.net/p/vice-emu/code/HEAD/tree/tags/v3.7.1/
+# in directories like:
+# /vice/data/C64
+# and so on
+#
+# other places:
+# http://www.zimmers.net/anonftp/pub/cbm/firmware/computers/c64/index.html
+
+- name: "vice : c64 roms"
+  become: yes
+  copy:
+    src: files/vice/{{ item }}
+    dest: /usr/share/vice/{{ item }}
+  with_items:
+    - C64/basic-901226-01.bin
+    - C64/chargen-901225-01.bin
+    - C64/kernal-901227-03.bin
+    - DRIVES/dos1001-901887+8-01.bin
+    - DRIVES/dos1540-325302+3-01.bin
+    - DRIVES/dos1541-325302-01+901229-05.bin
+    - DRIVES/dos1541ii-251968-03.bin
+    - DRIVES/dos1551-318008-01.bin
+    - DRIVES/dos1570-315090-01.bin
+    - DRIVES/dos1571-310654-05.bin
+    - DRIVES/dos1571cr-318047-01.bin
+    - DRIVES/dos1581-318045-02.bin
+    - DRIVES/dos2031-901484-03+05.bin
+    - DRIVES/dos2040-901468-06+07.bin
+    - DRIVES/dos3040-901468-11-13.bin
+    - DRIVES/dos4040-901468-14-16.bin
+    - DRIVES/dos9000-300516+7-revC.bin
+    - PRINTER/cbm1526-325341-08.bin
+    - PRINTER/mps801.bin
+    - PRINTER/mps803.bin
+    - PRINTER/nl10.bin

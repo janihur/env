@@ -1,0 +1,3 @@
+---
+- name: include vice
+  include_tasks: vice.yml
