@@ -83,6 +83,24 @@ gpg --output private.pgp --armor --export-secret-key <KEY_ID>
 gpg --import private.pgp
 ```
 
+When the key is copied to another machine it doesn't necessary work anymore because of wrong trust level. Set the [key's trust](https://stackoverflow.com/a/34132924/272735) to `ultimate`:
+```
+gpg --list-keys
+[...]
+gpg --edit-key <KEY_ID>
+gpg> trust
+[...]
+  1 = I don't know or won't say
+  2 = I do NOT trust
+  3 = I trust marginally
+  4 = I trust fully
+  5 = I trust ultimately
+  m = back to the main menu
+
+Your decision? 5
+Do you really want to set this key to ultimate trust? (y/N) y
+```
+
 ## Firefox Setup
 
 Enable Firefox account sync. For other settings see [firefox](http://devoops.metsankulma.net/firefox.html).
