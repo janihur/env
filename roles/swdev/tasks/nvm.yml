@@ -1,0 +1,15 @@
+---
+# Node Version Manager
+# https://github.com/nvm-sh/nvm
+
+- name: "nvm {{ nvm_version }} : clone the repository"
+  git:
+    repo: https://github.com/nvm-sh/nvm
+    dest: $HOME/.nvm
+    version: "{{ nvm_version }}"
+
+- name: "nvm {{ nvm_version }} : activation script"
+  copy:
+    src: files/activate-nvm.sh
+    dest: $HOME/.nvm/activate.sh
+    mode: a=r
