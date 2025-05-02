@@ -9,6 +9,8 @@
     - emacs
     - eza
     - ffmpeg
+    - graphicsmagick
+    - graphviz
     - nfs-client
     - openjdk-21-jre-headless
     - pass
