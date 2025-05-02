@@ -1,4 +1,10 @@
 ---
+- name: python3 venv
+  become: yes
+  apt:
+    name:
+      - python3.12-venv
+
 - name: include docker
   include_tasks: docker.yml
 
