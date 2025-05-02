@@ -8,4 +8,5 @@
     - { role: apps,   tags: ["always"] }
     - { role: p20n,   tags: ["always"] }
     - { role: swdev,  tags: ["always"] }
+    - { role: xml,    tags: ["always"] }
     - { role: emus,   tags: ["never", "emus"] }

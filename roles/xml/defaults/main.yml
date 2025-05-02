@@ -1,0 +1,10 @@
+---
+saxon_he_version: 11.4
+saxon_he_jar: Saxon-HE-{{ saxon_he_version }}.jar
+saxon_he_download_path: https://search.maven.org/remotecontent?filepath=net/sf/saxon/Saxon-HE/{{ saxon_he_version }}/{{ saxon_he_jar }}
+saxon_he_checksum: sha256:42e35494dc2e6b5e97256ae7cdf2b7ce30439c352566f35de02bed3a06a2b169
+
+xmlresolver_version: 4.5.0
+xmlresolver_jar: xmlresolver-{{ xmlresolver_version}}.jar
+xmlresolver_download_path: https://search.maven.org/remotecontent?filepath=org/xmlresolver/xmlresolver/{{ xmlresolver_version }}/{{ xmlresolver_jar }}
+xmlresolver_checksum: sha256:d27532092ec9aa0990f90bdc43ffec94b302f4e198545b83f80be1407f45500f

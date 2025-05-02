@@ -1,0 +1,36 @@
+---
+# XML Resolver is a SAXON 11 pre-requirement
+- name: "xml resolver {{ xmlresolver_version }} : to be or not to be"
+  stat:
+    path: "/usr/local/lib/{{ xmlresolver_jar }}"
+  register: xmlresolver_meta
+
+- name: "xml resolver {{ xmlresolver_version }} : download"
+  when: xmlresolver_meta.stat.exists == False
+  become: yes
+  get_url:
+    checksum: "{{ xmlresolver_checksum }}"
+    url: "{{ xmlresolver_download_path }}"
+    dest: "/usr/local/lib/{{ xmlresolver_jar }}"
+    mode: a=r
+
+- name: "saxon he {{ saxon_he_version }} : to be or not to be"
+  stat:
+    path: "/usr/local/lib/{{ saxon_he_jar }}"
+  register: saxon_he_meta
+
+- name: "saxon he {{ saxon_he_version }} : download"
+  when: saxon_he_meta.stat.exists == False
+  become: yes
+  get_url:
+    checksum: "{{ saxon_he_checksum }}"
+    url: "{{ saxon_he_download_path }}"
+    dest: "/usr/local/lib/{{ saxon_he_jar }}"
+    mode: a=r
+
+- name: "saxon he {{ saxon_he_version }} : convenient saxon xslt runner"
+  become: yes
+  template:
+    src: saxon-xslt.j2
+    dest: /usr/local/bin/saxon-xslt.sh
+    mode: a=rx
