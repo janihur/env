@@ -76,3 +76,8 @@
   copy:
     src: files/.vimrc
     dest: $HOME/.vimrc
+
+- name: bc configuration
+  copy:
+    src: files/.bc
+    dest: $HOME/.bc

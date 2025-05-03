@@ -2,6 +2,7 @@
 
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] \[\033[01;33m\]$(__git_ps1 "[%s]")\[\033[00m\]\n\[\033[01;34m\]\W\[\033[00m\]\$ '
 
+alias bc="bc ~/.bc"
 alias c=batcat
 alias e='emacsclient -t'
 alias g=git
