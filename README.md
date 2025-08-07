@@ -41,3 +41,21 @@ sudo apt install -y ansible git
 ```
 ansible-playbook -vv default.yml --connection=local --ask-become-pass
 ```
+
+## Roles
+
+|Role    |Description|
+|--------|-----------|
+|`apps`  |Desktop applications.|
+|`common`|Common command-line tooling.|
+|`emus`  |Emulators.|
+|`p20n`  |Personalization.|
+|`swdev` |Software development tools.|
+|`xml`   |XML tooling (currently only Saxon).|
+
+## Node.js
+
+Use Node Version Manager (NVM) to enable right Node environment:
+```
+source ~/.nvm/activate.sh
+```
