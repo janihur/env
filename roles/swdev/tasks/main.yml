@@ -10,3 +10,6 @@
 
 - name: include nvm
   include_tasks: nvm.yml
+
+- name: include vscode
+  include_tasks: vscode.yml

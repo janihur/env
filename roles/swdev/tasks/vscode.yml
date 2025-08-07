@@ -1,0 +1,35 @@
+---
+# Microsoft Visual Studio Code
+# https://code.visualstudio.com/
+# https://code.visualstudio.com/docs/setup/linux
+- name: "microsoft visual studio code: apt repository settings"
+  become: yes
+  copy:
+    src: files/{{ item.file }}
+    dest: "{{ item.dest }}/{{ item.file }}"
+    owner: root
+    group: root
+    mode: a=r
+  with_items:
+      - { file: packages.microsoft.gpg, dest: /etc/apt/keyrings }
+      - { file: vscode.list, dest: /etc/apt/sources.list.d }
+
+- name: "microsoft visual studio code: install"
+  become: yes
+  apt:
+    name:
+      - code
+    state: present
+    update_cache: yes
+
+- name: "microsoft visual studio code: user settings directory"
+  file:
+    path: ~/.config/Code/User
+    state: directory
+    mode: 0775
+
+- name: "microsoft visual studio code: user settings"
+  copy:
+    src: files/vscode-settings.json
+    dest: ~/.config/Code/User/settings.json
+    mode: 0644

@@ -1,0 +1,11 @@
+{
+    "editor.fontSize": 13,
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "all",
+    "editor.wordWrap": "on",
+    "editor.zoomLevel": 1, // percentage: default is 0, 1 is 100% larger
+    "git.enabled": false,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "redhat.telemetry.enabled": false,
+    "window.title": "${dirty}${rootNameShort}${separator}${activeEditorShort}${separator}${remoteName}",
+}
