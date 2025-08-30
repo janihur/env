@@ -3,6 +3,7 @@
 # https://code.visualstudio.com/
 # https://code.visualstudio.com/docs/setup/linux
 - name: "microsoft visual studio code: apt repository settings"
+  when: false # disabled as introduced APT configuration conflict
   become: yes
   copy:
     src: files/{{ item.file }}
@@ -15,6 +16,7 @@
       - { file: vscode.list, dest: /etc/apt/sources.list.d }
 
 - name: "microsoft visual studio code: install"
+  when: false # disabled as introduced APT configuration conflict
   become: yes
   apt:
     name:
