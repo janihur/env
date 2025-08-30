@@ -47,6 +47,7 @@ ansible-playbook -vv default.yml --connection=local --ask-become-pass
 |Role    |Description|
 |--------|-----------|
 |`apps`  |Desktop applications.|
+|`bbcbasic`|BBC Basic.|
 |`common`|Common command-line tooling.|
 |`emus`  |Emulators.|
 |`p20n`  |Personalization.|
