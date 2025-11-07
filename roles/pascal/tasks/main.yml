@@ -1,0 +1,52 @@
+---
+# https://www.freepascal.org/
+
+- name: "freepascal 3.2.2 : to be or not to be"
+  stat:
+    path: "/opt/freepascal-3.2.2"
+  register: freepascal_meta
+
+- name: "freepascal 3.2.2 : download zip file"
+  when: freepascal_meta.stat.exists == False
+  get_url:
+    checksum: sha1:e122d7676262d33ca3b34606d9febe8a23f1317b
+    url: https://sourceforge.net/projects/freepascal/files/Linux/3.2.2/fpc-3.2.2.x86_64-linux.tar/download
+    dest: /tmp/fpc-3.2.2.x86_64-linux.tar
+
+- name: "freepascal 3.2.2 : create home directory"
+  become: yes
+  file:
+    state: directory
+    path: "/opt/freepascal-3.2.2"
+
+- name: "freepascal 3.2.2 : unpack tar file"
+  when: freepascal_meta.stat.exists == False
+  unarchive:
+    remote_src: yes
+    src: "/tmp/fpc-3.2.2.x86_64-linux.tar"
+    dest: "/tmp"
+
+- name: "freepascal 3.2.2 : custom install script"
+  when: freepascal_meta.stat.exists == False
+  ansible.builtin.copy:
+    src: files/freepascal-install.sh
+    dest: /tmp/fpc-3.2.2.x86_64-linux/freepascal-install.sh
+    mode: '0755'
+
+- name: "freepascal 3.2.2 : run install script"
+  when: freepascal_meta.stat.exists == False
+  become: yes
+  ansible.builtin.command: ./freepascal-install.sh
+  args:
+    chdir: /tmp/fpc-3.2.2.x86_64-linux/
+    creates: /etc/fpc.cfg
+
+- name: "freepascal 3.2.2 : convenient links"
+  become: yes
+  ansible.builtin.file:
+    state: link
+    src: "/opt/freepascal-3.2.2/bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+  with_items:
+    - fp
+    - fpc

@@ -11,3 +11,4 @@
     - { role: xml,    tags: ["always"] }
     - { role: bbcbasic, tags: ["never", "bbcbasic"] }
     - { role: emus,   tags: ["never", "emus"] }
+    - { role: pascal, tags: ["never", "pascal"] }
