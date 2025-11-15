@@ -50,3 +50,10 @@
   with_items:
     - fp
     - fpc
+
+- name: "freepascal 3.2.2 : convenient start script"
+  become: yes
+  ansible.builtin.copy:
+    src: files/fp-ide.sh
+    dest: /usr/local/bin/fp-ide.sh
+    mode: a=rx
