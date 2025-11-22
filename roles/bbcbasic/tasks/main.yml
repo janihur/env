@@ -2,7 +2,7 @@
 # https://www.bbcbasic.co.uk/bbcsdl/
 - name: "for SDL 2.0 : pre-requirements"
   become: yes
-  apt:
+  ansible.builtin.apt:
     name:
     - libsdl2-2.0-0
     - libsdl2-net-2.0-0
@@ -10,28 +10,28 @@
     state: present
 
 - name: "for SDL 2.0 : to be or not to be"
-  stat:
+  ansible.builtin.stat:
     path: "/opt/bbcbasic-for-sdl2-1.42a"
   register: bbcbasic_for_sdl2_meta
 
 # no version in the download path so next time the version might be different
 - name: "for SDL 2.0 : download zip file"
   when: bbcbasic_for_sdl2_meta.stat.exists == False
-  get_url:
+  ansible.builtin.get_url:
     checksum: sha1:371332ca3fd54e36aa57db21199b41818aa409e2
     url: https://www.bbcbasic.co.uk/bbcsdl/bbclinux.zip
     dest: /tmp/bbclinux.zip
 
 - name: "for SDL 2.0 : create home directory"
   become: yes
-  file:
+  ansible.builtin.file:
     state: directory
     path: "/opt/bbcbasic-for-sdl2-1.42a"
 
 - name: "for SDL 2.0 : unpack zip file"
   when: bbcbasic_for_sdl2_meta.stat.exists == False
   become: yes
-  unarchive:
+  ansible.builtin.unarchive:
     remote_src: yes
     src: /tmp/bbclinux.zip
     dest: "/opt/bbcbasic-for-sdl2-1.42a"
@@ -40,7 +40,21 @@
 
 - name: "for SDL 2.0 : add to path"
   become: yes
-  file:
+  ansible.builtin.file:
     state: link
     path: /usr/local/bin/bbcsdl
     src: "/opt/bbcbasic-for-sdl2-1.42a/bbcsdl"
+
+- name: "for SDL 2.0 : convenient telstar start script"
+  become: yes
+  ansible.builtin.copy:
+    src: files/telstar.sh
+    dest: /usr/local/bin/telstar.sh
+    mode: a=rx
+
+- name: "for SDL 2.0 : nxtel alias for telstar"
+  become: yes
+  ansible.builtin.file:
+    state: link
+    path: /usr/local/bin/nxtel
+    src: /usr/local/bin/telstar.sh
