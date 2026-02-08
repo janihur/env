@@ -4,6 +4,11 @@ saxon_he_jar: Saxon-HE-{{ saxon_he_version }}.jar
 saxon_he_download_path: https://search.maven.org/remotecontent?filepath=net/sf/saxon/Saxon-HE/{{ saxon_he_version }}/{{ saxon_he_jar }}
 saxon_he_checksum: sha256:42e35494dc2e6b5e97256ae7cdf2b7ce30439c352566f35de02bed3a06a2b169
 
+saxonc_he_version: 12.9
+saxonc_he_download_path: https://downloads.saxonica.com/SaxonC/HE/12/SaxonCHE-linux-x86_64-12-9-0.zip
+saxonc_he_checksum: sha256:b3ec20bea9464c27dce534aeac99cf6c134dcf8cd8a020f353ca6727d6bca18f
+saxonc_he_home: /opt/saxonc-he-{{ saxonc_he_version }}
+
 xmlresolver_version: 4.5.0
 xmlresolver_jar: xmlresolver-{{ xmlresolver_version}}.jar
 xmlresolver_download_path: https://search.maven.org/remotecontent?filepath=org/xmlresolver/xmlresolver/{{ xmlresolver_version }}/{{ xmlresolver_jar }}

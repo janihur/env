@@ -1,28 +1,32 @@
 ---
+# -----------------------------------------------------------------------------
+# SaxonJ
+# https://www.saxonica.com/documentation11/index.html
+
 # XML Resolver is a SAXON 11 pre-requirement
 - name: "xml resolver {{ xmlresolver_version }} : to be or not to be"
-  stat:
+  ansible.builtin.stat:
     path: "/usr/local/lib/{{ xmlresolver_jar }}"
   register: xmlresolver_meta
 
 - name: "xml resolver {{ xmlresolver_version }} : download"
   when: xmlresolver_meta.stat.exists == False
   become: yes
-  get_url:
+  ansible.builtin.get_url:
     checksum: "{{ xmlresolver_checksum }}"
     url: "{{ xmlresolver_download_path }}"
     dest: "/usr/local/lib/{{ xmlresolver_jar }}"
     mode: a=r
 
 - name: "saxon he {{ saxon_he_version }} : to be or not to be"
-  stat:
+  ansible.builtin.stat:
     path: "/usr/local/lib/{{ saxon_he_jar }}"
   register: saxon_he_meta
 
 - name: "saxon he {{ saxon_he_version }} : download"
   when: saxon_he_meta.stat.exists == False
   become: yes
-  get_url:
+  ansible.builtin.get_url:
     checksum: "{{ saxon_he_checksum }}"
     url: "{{ saxon_he_download_path }}"
     dest: "/usr/local/lib/{{ saxon_he_jar }}"
@@ -30,7 +34,53 @@
 
 - name: "saxon he {{ saxon_he_version }} : convenient saxon xslt runner"
   become: yes
-  template:
+  ansible.builtin.template:
     src: saxon-xslt.j2
     dest: /usr/local/bin/saxon-xslt.sh
+    mode: a=rx
+
+# -----------------------------------------------------------------------------
+# SaxonC
+# https://www.saxonica.com/saxon-c/index.xml
+
+- name: "saxonc he {{ saxonc_he_version }} : to be or not to be"
+  ansible.builtin.stat:
+    path: "{{ saxonc_he_home }}"
+  register: saxonc_he_meta
+
+- name: "saxonc he {{ saxonc_he_version }} : create home directory"
+  become: yes
+  ansible.builtin.file:
+    state: directory
+    path: "{{ saxonc_he_home }}"
+    owner: root
+    group: root
+    recurse: yes
+
+- name: "saxonc he {{ saxonc_he_version }} : create temporary directory"
+  when: saxonc_he_meta.stat.exists == False
+  ansible.builtin.file:
+    state: directory
+    path: /tmp/saxonc-he
+
+# unzip to temporary location and copy to final location needed to strip the 
+# top directory from the zip file
+- name: "saxonc he {{ saxonc_he_version }} : unpack zip file"
+  when: saxonc_he_meta.stat.exists == False
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: /tmp/saxonc-he.zip
+    dest: /tmp/saxonc-he
+
+- name: "saxonc he {{ saxonc_he_version }} : copy files to final location"
+  when: saxonc_he_meta.stat.exists == False
+  become: yes
+  ansible.builtin.shell:
+    cmd: "cp -r /tmp/saxonc-he/*/. {{ saxonc_he_home }}/"
+
+- name: "saxonc he {{ saxonc_he_version }} : convenient saxonc xslt runner"
+  become: yes
+  ansible.builtin.template:
+    src: saxonc-xslt.j2
+    dest: /usr/local/bin/saxonc-xslt.sh
     mode: a=rx
