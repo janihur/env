@@ -28,6 +28,15 @@ How to mount the shares in Linux:
 
 Mount/unmount example:
 ```
-$ sudo mount -t nfs filevault.home:/DataVolume/arkisto /mnt/nas/arkisto
+$ sudo mount -v -t nfs filevault.home:/DataVolume/arkisto /mnt/nas/arkisto
 $ sudo umount -f -l /mnt/nas/arkisto
 ```
+
+## Troubleshooting
+
+```
+mount.nfs: Protocol not supported for filevault.home:/DataVolume/backup on /mnt/filevault/backup
+```
+
+1. NAS is not on-line (I have problems with my router).
+2. NAS requires clients' IP address whitelisted. I don't have static IP addresses configured so have to add new addresses every now and then.
