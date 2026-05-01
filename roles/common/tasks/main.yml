@@ -9,6 +9,7 @@
     - emacs
     - eza
     - ffmpeg
+    - git-lfs
     - graphicsmagick
     - graphviz
     - nfs-client
