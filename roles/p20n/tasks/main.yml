@@ -42,30 +42,14 @@
     src: files/gpg-agent.conf
     dest: $HOME/.gnupg/gpg-agent.conf
 
-- name: blackarmor nas mount points
-  become: yes
-  file:
-    state: directory
-    path: "{{ item }}"
-  loop:
-    - /mnt/filevault/arkisto
-    - /mnt/filevault/backup
-    - /mnt/filevault/kotivideot
-    - /mnt/filevault/music
-    - /mnt/filevault/retro
-    - /mnt/filevault/sw
-    - /mnt/filevault/valokuvat
-    - /mnt/filevault/xxx
-
-- name: blackarmor nas mount scripts
+- name: backup scripts
   become: yes
   copy:
     src: files/{{ item }}
     dest: /usr/local/bin/{{ item }}
     mode: a=rx
   loop:
-    - filevault-mount.sh
-    - filevault-umount.sh
+    - backup.sh
 
 - name: ssh configuration
   copy:
