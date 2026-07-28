@@ -50,6 +50,7 @@
     mode: a=rx
   loop:
     - backup.sh
+    - backup-usb.sh
 
 - name: ssh configuration
   copy:

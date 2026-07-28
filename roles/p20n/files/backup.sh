@@ -5,17 +5,17 @@
 set -e
 # set -x
 
-declare -r buffalo=/media/jani/BuffaloMS
-declare -r lacie=/media/jani/LaCie750GB
+declare -r buffalo=/media/${USER}/BuffaloMS
+declare -r lacie=/media/${USER}/LaCie750GB
 
-if [ ! -d ${lacie} ]
+if [[ ! -d ${lacie} ]]
 then
   echo "ERROR: directory ${lacie} not available"
   exit 1
 fi
 
 # TODO
-# if [ ! -d ${buffalo} ]
+# if [[ ! -d ${buffalo} ]]
 # then
 #   echo "ERROR: directory ${buffalo} not available"
 #   exit 1
