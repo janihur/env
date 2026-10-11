@@ -8,6 +8,7 @@
     - curl
     - emacs
     - eza
+    - fdupes
     - ffmpeg
     - git-lfs
     - graphicsmagick
